@@ -25,6 +25,21 @@ docker-compose run web python manage.py migrate
 docker-compose run web python manage.py createsuperuser
 ```
 
+*If you have a mistake *** Is the server running on host "db" (192.168.80.2) and accepting TCP/IP connections on port 5432? *** replace the line *
+
+```
+ports:
+    - "54321:5432"
+```
+
+On
+
+```
+ports:
+    - "5432:5432"
+
+```
+
 If you want to change the database login data, change the settings in `test_task_api/blog/settings.py`, Replace the current DATABASES with
 ```
 DATABASES = {
