@@ -194,6 +194,8 @@ with these fields
 ```
 Where the parent_id is the id of the parent comment
 
+The maximum nesting level of comments is 3.
+
 ## Authors
 
 * [Dmitrii Grekov] (https://github.com/DmitriiGrekov)
