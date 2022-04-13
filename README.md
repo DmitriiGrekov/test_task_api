@@ -127,7 +127,7 @@ Response
 }
 ```
 
-To view a separate post, you need to send a GET request to `http://127.0.0.1:8000/api/posts/{post_id}`
+To view a separate post, you need to send a GET request to `http://127.0.0.1:8000/api/post/{post_id}`
 
 
 
