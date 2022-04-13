@@ -19,8 +19,9 @@ cd test_task_api
 docker-compose build
 ```
 
-### Create django superuser 
+### Migrate databases and  create django superuser 
 ```
+docker-compose run web python manage.py migrate 
 docker-compose run web python manage.py createsuperuser
 ```
 
