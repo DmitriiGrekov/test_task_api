@@ -25,7 +25,7 @@ docker-compose run web python manage.py migrate
 docker-compose run web python manage.py createsuperuser
 ```
 
-*If you have a mistake *** Is the server running on host "db" (192.168.80.2) and accepting TCP/IP connections on port 5432? *** replace the line *
+*If you have a mistake * *** Is the server running on host "db" (192.168.80.2) and accepting TCP/IP connections on port 5432? *** *replace the line *
 
 ```
 ports:
