@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from .models import CommentModel, PostModel
 from drf_writable_nested.serializers import WritableNestedModelSerializer
+from mptt.utils import previous_current_next
 
 
 class FilterCommentListSerializer(serializers.ListSerializer):
@@ -16,6 +17,7 @@ class RecursiveCommentSerializer(serializers.Serializer):
 
     def to_representation(self, value):
         serializer = self.parent.parent.__class__(value, context=self.context)
+        # serializer = RecursiveCommentSerializer(value, context=self.context)
         return serializer.data
 
 
@@ -23,7 +25,10 @@ class CommentSerializer(WritableNestedModelSerializer,
                         serializers.ModelSerializer):
     """Вывод комментариев к посту"""
 
+
     children = RecursiveCommentSerializer(many=True)
+
+    
 
     class Meta:
         list_serializer_class = FilterCommentListSerializer
@@ -42,6 +47,38 @@ class PostSerializer(WritableNestedModelSerializer,
                      serializers.ModelSerializer):
     comments = CommentSerializer(many=True)
     """Вывод всех постов"""
+
+    # my_field = serializers.SerializerMethodField('is_named_bar')
+
+    # def is_named_bar(self, instance):
+        # comments = instance.comments.all()
+
+        # cm = []
+
+        # comment_count = len(comments)
+        # iter_count = 0
+
+        # for i in range(len(comments)-1, -1, -1) :
+
+            # if not comments[i].is_child_node():
+                # iter_count += 1
+                # print(comments[i].get_children())
+                
+                # cm.append({
+                    # 'id': comments[i].id,
+                    # 'post': comments[i].post.id,
+                    # 'author_name': comments[i].author_name,
+                    # 'text':comments[i].text,
+                    # 'pub_date': comments[i].pub_date,
+                    # 'level': comments[i].level,
+                    # 'children': []})
+
+                # for children in comments[i].get_children():
+                    # print(children)
+        
+        # return instance.title
+
+
 
     class Meta:
         model = PostModel

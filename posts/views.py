@@ -1,3 +1,4 @@
+from django.db.models.query import Prefetch
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from .models import PostModel, CommentModel
@@ -10,6 +11,7 @@ def api_post(request):
     """Вывод всех постов"""
 
     if request.method == 'GET':
+
         posts = PostModel.objects.all()
         serializer = PostSerializer(posts, many=True)
         return Response(serializer.data)

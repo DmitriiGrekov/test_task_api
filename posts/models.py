@@ -1,12 +1,11 @@
 from django.db import models
-from django.contrib.auth.models import User
-from mptt.models import MPTTModel, TreeForeignKey
-from rest_framework import serializers
+from django.contrib.auth.models import User 
+from mptt.models import MPTTModel, TreeForeignKey 
+from rest_framework import serializers 
 
 
-class PostModel(models.Model):
-    """Модель поста"""
-
+class PostModel(models.Model): 
+    """Модель поста""" 
     title = models.CharField(
                             max_length=120,
                             verbose_name="Заголовок статьи"
@@ -59,10 +58,6 @@ class CommentModel(MPTTModel):
     def save(self, *args, **kwargs):
         if self.parent != None:
             self.level = self.parent.level
-            lvl = self.parent.level if self.parent.level else 0
-            print(lvl)
-            if self.parent.level == 3:
-                raise serializers.ValidationError({"max_level": "Достигнут максимальный уровень вложенности"})
         super(CommentModel, self).save(*args, **kwargs)
 
     def __str__(self):
